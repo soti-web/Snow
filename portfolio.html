@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folio</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/style.css">
+<link rel="stylesheet" href="./assets/css/portfolio.css">
+</head>
+<body class="portfolio-page">
+
+<div id="loading-screen" class="loading-screen">
+  <div class="loading-logo">folio.</div>
+  <div class="loading-spinner"></div>
+</div>
+
+<div id="not-found" class="not-found" style="display:none;">
+  <div class="nf-logo">folio.</div>
+  <div class="nf-icon">🔍</div>
+  <h1>Page not found</h1>
+  <p>This username doesn't exist yet.</p>
+  <a href="./claim.html" class="btn btn-primary">Claim it →</a>
+</div>
+
+<div id="portfolio-page" style="display:none;">
+  <div class="pf-full-card" id="pf-full-card">
+
+    <!-- HEADER -->
+    <div class="pf-full-header" id="pf-full-header">
+      <div class="pf-full-avi" id="pf-full-avi">🧑‍💻</div>
+      <h1 class="pf-full-name" id="pf-full-name">Name</h1>
+      <p class="pf-full-role" id="pf-full-role">Title</p>
+      <p class="pf-full-bio"  id="pf-full-bio">Bio</p>
+    </div>
+
+    <!-- LINKS -->
+    <div class="pf-full-links" id="pf-full-links"></div>
+
+    <!-- FOOTER -->
+    <div class="pf-full-footer">
+      <a href="./claim.html">
+        Made with <span>folio.</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="./assets/js/portfolio.js"></script>
+</body>
+</html>
