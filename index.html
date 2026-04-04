@@ -1,73 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snow</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folio — Build Your Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
-<body>
+<!-- ===== LANDING ===== -->
+<div id="landing">
+  <nav>
+    <div class="logo">folio.</div>
+    <div class="nav-right">
+      <a href="#samples" class="nav-link">Examples</a>
+      <a href="#cta" class="nav-link">Get Started</a>
+      <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
+      <button class="btn btn-ghost hide-mobile" onclick="showBuilder()">Sign in</button>
+      <button class="btn btn-primary" onclick="showBuilder()">Start Free</button>
+    </div>
+  </nav>
 
- <div class="nav-actions">
+  <section class="hero">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="hero-badge fade-up d1">✦ Portfolio platform for everyone</div>
+    <h1 class="fade-up d2">Your work, your links,<br><span class="grad">one beautiful page.</span></h1>
+    <p class="hero-sub fade-up d3">Build a stunning portfolio in minutes. Share your projects, links, and story — all in one place.</p>
+    <div class="hero-cta fade-up d4">
+      <button class="btn btn-primary btn-lg" onclick="showBuilder()">✦ Create yours — it's free</button>
+      <a href="#samples" class="btn btn-ghost btn-lg">See examples</a>
+    </div>
+  </section>
 
-  <!-- Theme Button -->
-  <button class="btn-icon" id="themeBtn" title="Toggle theme">
-    <svg id="themeIcon" viewBox="0 0 24 24" fill="none" 
-         stroke="currentColor" stroke-width="2" width="17" height="17">
-      <circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/>
-      <line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/>
-      <line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>
-  </button>
+  <section class="features-section fade-up d5">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Ready in minutes</h3>
+        <p>Fill in your name, bio, and links. Your portfolio is live instantly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Your style</h3>
+        <p>Pick colors, emojis, and themes. Make it look and feel like you.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>One link for all</h3>
+        <p>Get a clean shareable URL and send it everywhere.</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- Menu Button -->
-  <button class="btn-icon" id="menuBtn" title="Menu">
-    <svg viewBox="0 0 24 24" fill="none" 
-         stroke="currentColor" stroke-width="2" width="17" height="17">
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
+  <section class="samples-section" id="samples">
+    <div class="section-header">
+      <div class="section-eyebrow">Examples</div>
+      <h2>See what others built</h2>
+      <p>Tap any card to load it into the builder</p>
+    </div>
+    <div class="profiles-scroll" id="profiles-container"></div>
+  </section>
 
+  <section class="cta-strip" id="cta">
+    <h2>Ready to build yours?</h2>
+    <p>Free forever. No credit card. Set up in under 2 minutes.</p>
+    <button class="btn btn-primary btn-lg" onclick="showBuilder()">Create your folio →</button>
+  </section>
+
+  <footer>made with <span>♥</span> · folio.app · © 2025</footer>
 </div>
 
-  
-  <!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#">Home</a>
-  <a href="#">Custom Domain</a>
-  <a href="#">Examples</a>
-  <a href="#">Changelog</a>
-  <a href="#">About Us</a>
-  <div class="menu-footer">
-    <a href="#" class="menu-login">Login</a>
-    <a href="#" class="menu-start">Start Now</a>
+<!-- ===== BUILDER ===== -->
+<div id="builder">
+  <nav class="builder-nav">
+    <div class="builder-nav-left">
+      <button class="back-btn" onclick="showLanding()">← Back</button>
+      <div class="logo" style="font-size:1.15rem;">folio.</div>
+    </div>
+    <div class="builder-nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn-2">🌙</button>
+      <button class="publish-btn" onclick="openShareModal()">🚀 Publish</button>
+    </div>
+  </nav>
+
+  <div class="builder-tabs" id="builder-tabs">
+    <button class="tab-btn active" onclick="switchTab('editor')">✏️ Edit</button>
+    <button class="tab-btn" onclick="switchTab('preview')">👁 Preview</button>
+  </div>
+
+  <div class="builder-body">
+    <!-- EDITOR -->
+    <div class="editor-panel" id="editor-panel">
+      <div class="editor-section">
+        <div class="editor-label">Your Info</div>
+        <div class="input-group">
+          <label>Name or Brand</label>
+          <input type="text" id="pf-name" placeholder="e.g. Hama Karwan" oninput="updatePreview()">
+        </div>
+        <div class="input-group">
+          <label>Job Title</label>
+          <input type="text" id="pf-role" placeholder="e.g. Web Developer" oninput="updatePreview()">
+        </div>
+        <div class="input-group">
+          <label>Short Bio</label>
+          <textarea id="pf-bio" placeholder="I build beautiful websites and love clean code..." oninput="updatePreview()"></textarea>
+        </div>
+      </div>
+      <div class="editor-section">
+        <div class="editor-label">Avatar Emoji</div>
+        <div class="emoji-grid" id="emoji-grid"></div>
+      </div>
+      <div class="editor-section">
+        <div class="editor-label">Background Theme</div>
+        <div class="color-grid" id="color-grid"></div>
+      </div>
+      <div class="editor-section">
+        <div class="editor-label">Your Links</div>
+        <div class="link-items" id="link-items"></div>
+        <button class="add-link-btn" onclick="addLink()">+ Add a new link</button>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="preview-panel" id="preview-panel">
+      <div class="preview-browser">
+        <div class="browser-dots">
+          <div class="bd bd-r"></div>
+          <div class="bd bd-y"></div>
+          <div class="bd bd-g"></div>
+        </div>
+        <div class="browser-url" id="browser-url-text">folio.app/you</div>
+      </div>
+      <div class="pf-card">
+        <div class="pf-header-block" id="pf-header-block" style="background:linear-gradient(135deg,#1a0a2e,#0d1b3e);">
+          <div class="pf-avi" id="pf-avi">🧑‍💻</div>
+          <div class="pf-name-text" id="pf-name-out">Your Name</div>
+          <div class="pf-role-text" id="pf-role-out">Your Title</div>
+          <div class="pf-bio-text" id="pf-bio-out">Your bio will appear here...</div>
+        </div>
+        <div id="pf-links-out" style="background:#0a0a0f;">
+          <div class="pf-links-block" id="pf-links-inner">
+            <div class="pf-empty-msg">Add links from the editor</div>
+          </div>
+          <div class="pf-links-footer">folio.app · built with ❤️</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-  
-  
-  
-  
-  
+<!-- MODAL -->
+<div class="modal-overlay" id="share-modal" onclick="handleModalClick(event)">
+  <div class="modal-box">
+    <div class="m-icon">🎉</div>
+    <h2>You're live!</h2>
+    <p>Your portfolio is ready. Copy your link and share it with the world.</p>
+    <div class="share-row">
+      <span id="modal-url-text">folio.app/you</span>
+      <button class="copy-btn" onclick="copyUrl()">Copy</button>
+    </div>
+    <button class="modal-close-btn" onclick="closeShareModal()">Close</button>
+  </div>
+</div>
 
-  <script src="script.js"></script>
-</body>
+<div class="toast" id="toast">✓ Copied to clipboard!</div>
 
-
-  <!-- JS -->
-  <script src="./assets/js/script.js"></script>
+<script src="./assets/js/app.js"></script>
 </body>
 </html>
-
