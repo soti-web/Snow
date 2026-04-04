@@ -200,5 +200,89 @@ function copyUrl() {
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
+// ===== USERNAME + FIREBASE =====
+
+// Username valid check
+function isValidUsername(username) {
+  return /^[a-z0-9_]{3,20}$/.test(username);
+}
+
+// Check if username is taken
+async function isUsernameTaken(username) {
+  const ref = doc(db, "portfolios", username);
+  const snap = await getDoc(ref);
+  return snap.exists();
+}
+
+// Save portfolio to Firestore
+async function savePortfolio(username, data) {
+  const ref = doc(db, "portfolios", username);
+  await setDoc(ref, {
+    ...data,
+    username,
+    createdAt: serverTimestamp()
+  });
+}
+
+// Called when user clicks Publish
+async function handlePublish() {
+  const username = document.getElementById("username-input")?.value?.trim().toLowerCase();
+
+  if (!username) {
+    showModalError("Please enter a username.");
+    return;
+  }
+  if (!isValidUsername(username)) {
+    showModalError("Username must be 3–20 chars: letters, numbers, underscore only.");
+    return;
+  }
+
+  const publishBtn = document.querySelector(".publish-btn");
+  publishBtn.textContent = "⏳ Checking...";
+  publishBtn.disabled = true;
+
+  try {
+    const taken = await isUsernameTaken(username);
+    if (taken) {
+      showModalError(`@${username} is already taken. Try another.`);
+      publishBtn.textContent = "🚀 Publish";
+      publishBtn.disabled = false;
+      return;
+    }
+
+    // Save to Firestore
+    const name = document.getElementById("pf-name")?.value || "";
+    const role = document.getElementById("pf-role")?.value || "";
+    const bio  = document.getElementById("pf-bio")?.value  || "";
+
+    await savePortfolio(username, {
+      name, role, bio,
+      emoji: state.emoji,
+      themeIdx: state.themeIdx,
+      links: state.links
+    });
+
+    // Show success modal
+    document.getElementById("modal-url-text").textContent = `folio.app/${username}`;
+    openShareModal();
+
+  } catch (err) {
+    showModalError("Something went wrong. Please try again.");
+    console.error(err);
+  }
+
+  publishBtn.textContent = "🚀 Publish";
+  publishBtn.disabled = false;
+}
+
+function showModalError(msg) {
+  const el = document.getElementById("username-error");
+  if (el) { el.textContent = msg; el.style.display = "block"; }
+}
+
+
 // ===== START =====
 init();
+
+
+
