@@ -1,9 +1,19 @@
+// ===== FIREBASE SETUP =====
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-import { db } from "./firebase.js";
-import {
-  doc, getDoc, setDoc, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyACMH3hBQqS9Jhw-d3xkLlY_RiKr0DOXsI",
+  authDomain: "dev-muhamad.firebaseapp.com",
+  projectId: "dev-muhamad",
+  storageBucket: "dev-muhamad.firebasestorage.app",
+  messagingSenderId: "224833840139",
+  appId: "1:224833840139:web:365f0ecd685d1c54ea530e"
+};
 
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
 
 // ===== DATA =====
 const EMOJIS = ['🧑‍💻','👨‍🎨','👩‍🎨','🚀','⚡','✨','🎯','💡','🌙','🔥','💎','🌟','🎨','📱','🖥️','🛸','🦄','🐉','🌊','🏔️','🎸','📷','✍️','🧩'];
@@ -201,39 +211,27 @@ function copyUrl() {
 }
 
 // ===== USERNAME + FIREBASE =====
-
-// Username valid check
 function isValidUsername(username) {
   return /^[a-z0-9_]{3,20}$/.test(username);
 }
 
-// Check if username is taken
 async function isUsernameTaken(username) {
   const ref = doc(db, "portfolios", username);
   const snap = await getDoc(ref);
   return snap.exists();
 }
 
-// Save portfolio to Firestore
 async function savePortfolio(username, data) {
   const ref = doc(db, "portfolios", username);
-  await setDoc(ref, {
-    ...data,
-    username,
-    createdAt: serverTimestamp()
-  });
+  await setDoc(ref, { ...data, username, createdAt: serverTimestamp() });
 }
 
-// Called when user clicks Publish
 async function handlePublish() {
   const username = document.getElementById("username-input")?.value?.trim().toLowerCase();
 
-  if (!username) {
-    showModalError("Please enter a username.");
-    return;
-  }
+  if (!username) { showModalError("Please enter a username."); return; }
   if (!isValidUsername(username)) {
-    showModalError("Username must be 3–20 chars: letters, numbers, underscore only.");
+    showModalError("3-20 chars: letters, numbers, underscore only.");
     return;
   }
 
@@ -250,7 +248,6 @@ async function handlePublish() {
       return;
     }
 
-    // Save to Firestore
     const name = document.getElementById("pf-name")?.value || "";
     const role = document.getElementById("pf-role")?.value || "";
     const bio  = document.getElementById("pf-bio")?.value  || "";
@@ -262,7 +259,6 @@ async function handlePublish() {
       links: state.links
     });
 
-    // Show success modal
     document.getElementById("modal-url-text").textContent = `folio.app/${username}`;
     openShareModal();
 
@@ -280,7 +276,7 @@ function showModalError(msg) {
   if (el) { el.textContent = msg; el.style.display = "block"; }
 }
 
-// Make functions global
+// ===== MAKE GLOBAL =====
 window.toggleTheme = toggleTheme;
 window.showBuilder = showBuilder;
 window.showLanding = showLanding;
@@ -299,9 +295,5 @@ window.loadSample = loadSample;
 window.updatePreview = updatePreview;
 window.setLink = setLink;
 
-
 // ===== START =====
 init();
-
-
-
