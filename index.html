@@ -82,10 +82,26 @@
       <div class="logo" style="font-size:1.15rem;">folio.</div>
     </div>
     <div class="builder-nav-right">
-      <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn-2">🌙</button>
-      <button class="publish-btn" onclick="openShareModal()">🚀 Publish</button>
+  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn-2">🌙</button>
+
+  <div class="username-area">
+    <div class="username-wrap">
+      <span class="username-prefix">folio.app/</span>
+      <input
+        type="text"
+        id="username-input"
+        placeholder="yourname"
+        maxlength="20"
+        oninput="this.value = this.value.toLowerCase().replace(/[^a-z0-9_]/g,'')"
+      >
     </div>
-  </nav>
+    <button class="publish-btn" onclick="handlePublish()">🚀 Publish</button>
+  </div>
+  <p id="username-error" style="display:none; color:#fa6d8f; font-size:0.75rem; margin-top:0.3rem; text-align:right;"></p>
+
+</div>
+
+
 
   <div class="builder-tabs" id="builder-tabs">
     <button class="tab-btn active" onclick="switchTab('editor')">✏️ Edit</button>
