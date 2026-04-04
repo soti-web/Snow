@@ -1,3 +1,50 @@
+
+/* USERNAME INPUT AREA */
+.username-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.username-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.username-wrap:focus-within {
+  border-color: var(--accent);
+}
+.username-prefix {
+  padding: 0 0.5rem 0 0.75rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  white-space: nowrap;
+  background: var(--surface2);
+}
+.username-wrap input {
+  border: none;
+  background: transparent;
+  padding: 0.5rem 0.75rem 0.5rem 0;
+  font-size: 0.82rem;
+  width: 130px;
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+}
+.username-wrap input:focus {
+  border: none;
+  background: transparent;
+}
+
+@media (max-width: 480px) {
+  .username-wrap input { width: 90px; }
+  .username-prefix { font-size: 0.68rem; }
+}
+
+
 /* ===== THEME VARIABLES ===== */
 [data-theme="dark"] {
   --bg: #0a0a0f;
