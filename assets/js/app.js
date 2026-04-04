@@ -280,6 +280,25 @@ function showModalError(msg) {
   if (el) { el.textContent = msg; el.style.display = "block"; }
 }
 
+// Make functions global
+window.toggleTheme = toggleTheme;
+window.showBuilder = showBuilder;
+window.showLanding = showLanding;
+window.switchTab = switchTab;
+window.addLink = addLink;
+window.removeLink = removeLink;
+window.cycleIcon = cycleIcon;
+window.pickEmoji = pickEmoji;
+window.pickTheme = pickTheme;
+window.handlePublish = handlePublish;
+window.openShareModal = openShareModal;
+window.closeShareModal = closeShareModal;
+window.handleModalClick = handleModalClick;
+window.copyUrl = copyUrl;
+window.loadSample = loadSample;
+window.updatePreview = updatePreview;
+window.setLink = setLink;
+
 
 // ===== START =====
 init();
