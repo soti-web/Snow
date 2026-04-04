@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folio — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/style.css">
+<link rel="stylesheet" href="./assets/css/auth.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="builder-nav">
+  <div class="builder-nav-left">
+    <div class="logo">folio.</div>
+    <span class="nav-username" id="nav-username">@...</span>
+  </div>
+  <div class="builder-nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙</button>
+    <button class="btn btn-ghost" onclick="viewPortfolio()">👁 View</button>
+    <button class="publish-btn" onclick="savePortfolio()">💾 Save</button>
+    <button class="btn-logout" onclick="logout()" title="Logout">↩</button>
+  </div>
+</nav>
+
+<!-- MOBILE TABS -->
+<div class="builder-tabs" id="builder-tabs">
+  <button class="tab-btn active" onclick="switchTab('editor')">✏️ Edit</button>
+  <button class="tab-btn" onclick="switchTab('preview')">👁 Preview</button>
+</div>
+
+<!-- BODY -->
+<div class="builder-body">
+
+  <!-- EDITOR -->
+  <div class="editor-panel" id="editor-panel">
+    <div class="editor-section">
+      <div class="editor-label">Your Info</div>
+      <div class="input-group">
+        <label>Name or Brand</label>
+        <input type="text" id="pf-name" placeholder="e.g. Hama Karwan" oninput="updatePreview()">
+      </div>
+      <div class="input-group">
+        <label>Job Title</label>
+        <input type="text" id="pf-role" placeholder="e.g. Web Developer" oninput="updatePreview()">
+      </div>
+      <div class="input-group">
+        <label>Short Bio</label>
+        <textarea id="pf-bio" placeholder="I build beautiful websites..." oninput="updatePreview()"></textarea>
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <div class="editor-label">Avatar Emoji</div>
+      <div class="emoji-grid" id="emoji-grid"></div>
+    </div>
+
+    <div class="editor-section">
+      <div class="editor-label">Background Theme</div>
+      <div class="color-grid" id="color-grid"></div>
+    </div>
+
+    <div class="editor-section">
+      <div class="editor-label">Your Links</div>
+      <div class="link-items" id="link-items"></div>
+      <button class="add-link-btn" onclick="addLink()">+ Add a new link</button>
+    </div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-panel" id="preview-panel">
+    <div class="preview-browser">
+      <div class="browser-dots">
+        <div class="bd bd-r"></div>
+        <div class="bd bd-y"></div>
+        <div class="bd bd-g"></div>
+      </div>
+      <div class="browser-url" id="browser-url-text">folio.app/you</div>
+    </div>
+    <div class="pf-card">
+      <div class="pf-header-block" id="pf-header-block" style="background:linear-gradient(135deg,#1a0a2e,#0d1b3e);">
+        <div class="pf-avi" id="pf-avi">🧑‍💻</div>
+        <div class="pf-name-text" id="pf-name-out">Your Name</div>
+        <div class="pf-role-text" id="pf-role-out">Your Title</div>
+        <div class="pf-bio-text" id="pf-bio-out">Your bio will appear here...</div>
+      </div>
+      <div id="pf-links-out" style="background:#0a0a0f;">
+        <div class="pf-links-block" id="pf-links-inner">
+          <div class="pf-empty-msg">Add links from the editor</div>
+        </div>
+        <div class="pf-links-footer">folio.app · built with ❤️</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SAVE TOAST -->
+<div class="toast" id="toast">✓ Saved!</div>
+
+<script type="module" src="./assets/js/dashboard.js"></script>
+</body>
+</html>
