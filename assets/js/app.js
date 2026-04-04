@@ -164,8 +164,19 @@ function updatePfBg() {
 function showBuilder() {
   document.getElementById('landing').style.display = 'none';
   document.getElementById('builder').classList.add('active');
+
+  // تاکو username تۆمار نەکرێت، editor و tabs بنێمخوێن
+  const username = document.getElementById('username-input')?.value?.trim();
+  if (!username) {
+    document.getElementById('editor-panel').classList.add('tab-hidden');
+    document.getElementById('preview-panel').classList.add('tab-hidden');
+    document.getElementById('builder-tabs').style.display = 'none';
+    document.getElementById('username-input').focus();
+  }
+
   updatePreview();
 }
+
 function showLanding() {
   document.getElementById('builder').classList.remove('active');
   document.getElementById('landing').style.display = 'flex';
