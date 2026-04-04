@@ -1,1 +1,229 @@
+/* ===== AUTH PAGES ===== */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.auth-logo {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.auth-title {
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: var(--text);
+}
+
+.auth-sub {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+/* CLAIM INPUT */
+.claim-input-wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.claim-input-wrap:focus-within {
+  border-color: var(--accent);
+}
+.claim-prefix {
+  padding: 0 0.5rem 0 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.claim-input-wrap input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.9rem 1rem 0.9rem 0;
+  font-size: 1rem;
+  font-family: 'Space Mono', monospace;
+  color: var(--text);
+  outline: none;
+  min-width: 0;
+}
+
+/* STATUS */
+.claim-status {
+  font-size: 0.82rem;
+  min-height: 1.2rem;
+  font-weight: 500;
+}
+.claim-status.checking { color: var(--muted); }
+.claim-status.available { color: #6dfacc; }
+.claim-status.taken { color: #fa6d8f; }
+
+/* BUTTONS */
+.btn-full {
+  width: 100%;
+  justify-content: center;
+  padding: 0.85rem;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+.btn-full:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* DIVIDER */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* SOCIAL BTN */
+.btn-social {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.8rem;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  text-decoration: none;
+}
+.btn-social:hover {
+  border-color: var(--accent);
+  background: var(--surface2);
+}
+.btn-social img {
+  width: 20px; height: 20px;
+}
+
+/* FORM */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  width: 100%;
+}
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+}
+.auth-input-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text2);
+}
+.auth-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  color: var(--text);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.auth-input:focus { border-color: var(--accent); }
+
+/* ERROR */
+.auth-error {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: rgba(250,109,143,0.1);
+  border: 1px solid rgba(250,109,143,0.3);
+  border-radius: 10px;
+  color: #fa6d8f;
+  font-size: 0.82rem;
+  display: none;
+  text-align: left;
+}
+.auth-error.show { display: block; }
+
+/* FOOTER TEXT */
+.auth-footer-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.auth-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.auth-link:hover { text-decoration: underline; }
+
+.auth-terms {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.auth-terms a { color: var(--accent); text-decoration: none; }
+
+/* FIXED THEME BTN */
+.pos-fixed {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+}
+
+/* USERNAME DISPLAY */
+.claiming-for {
+  font-size: 0.9rem;
+  color: var(--text2);
+}
+.claiming-for strong {
+  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+}
 
