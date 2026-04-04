@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folio — Create your account</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/style.css">
+<link rel="stylesheet" href="./assets/css/auth.css">
+</head>
+<body class="auth-page">
+
+<button class="theme-toggle pos-fixed" id="theme-btn" onclick="toggleTheme()">🌙</button>
+
+<div class="auth-card">
+  <div class="auth-logo">folio.</div>
+
+  <h1 class="auth-title">Create your account</h1>
+  <p class="claiming-for">Securing <strong id="username-display">...</strong></p>
+
+  <!-- GOOGLE -->
+  <button class="btn-social" onclick="signInWithGoogle()">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+    Continue with Google
+  </button>
+
+  <div class="auth-divider">OR</div>
+
+  <!-- EMAIL FORM -->
+  <div class="auth-form">
+    <div class="auth-input-group">
+      <label>Email</label>
+      <input type="email" id="reg-email" class="auth-input" placeholder="you@example.com">
+    </div>
+    <div class="auth-input-group">
+      <label>Password</label>
+      <input type="password" id="reg-password" class="auth-input" placeholder="Min. 6 characters">
+    </div>
+
+    <div class="auth-error" id="reg-error"></div>
+
+    <button class="btn btn-primary btn-full" onclick="registerWithEmail()">
+      Register →
+    </button>
+  </div>
+
+  <p class="auth-footer-text">
+    Already have an account? <a href="./login.html" class="auth-link">Login</a>
+  </p>
+  <p class="auth-terms">
+    By signing up, you agree to our
+    <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+  </p>
+</div>
+
+<script type="module" src="./assets/js/register.js"></script>
+</body>
+</html>
