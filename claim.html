@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folio — Claim your username</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/style.css">
+<link rel="stylesheet" href="./assets/css/auth.css">
+</head>
+<body class="auth-page">
+
+<button class="theme-toggle pos-fixed" id="theme-btn" onclick="toggleTheme()">🌙</button>
+
+<div class="auth-card">
+  <div class="auth-logo">folio.</div>
+  <h1 class="auth-title">Claim your username</h1>
+  <p class="auth-sub">Pick your unique link — no one else can take it.</p>
+
+  <div class="claim-input-wrap">
+    <span class="claim-prefix">folio.app/</span>
+    <input
+      type="text"
+      id="claim-input"
+      placeholder="yourname"
+      maxlength="20"
+      autocomplete="off"
+      autocapitalize="off"
+      oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_]/g,''); checkUsername()"
+    >
+  </div>
+
+  <div id="claim-status" class="claim-status"></div>
+
+  <button class="btn btn-primary btn-full" id="claim-btn" onclick="claimUsername()" disabled>
+    Claim it →
+  </button>
+
+  <p class="auth-footer-text">
+    Already have an account? <a href="./login.html" class="auth-link">Login</a>
+  </p>
+</div>
+
+<script type="module" src="./assets/js/claim.js"></script>
+</body>
+</html>
 
