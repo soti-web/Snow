@@ -1,4 +1,25 @@
 
+.btn-logout {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  width: 36px; height: 36px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-logout:hover { border-color: #fa6d8f; color: #fa6d8f; }
+
+.nav-username {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+
+
 /* USERNAME INPUT AREA */
 .username-area {
   display: flex;
