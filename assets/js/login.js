@@ -71,12 +71,15 @@ window.loginWithEmail = loginWithEmail;
 // Google login
 async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
   try {
+    localStorage.setItem('google_pending', 'true');
     await signInWithRedirect(auth, provider);
   } catch (err) {
     showError(err.message);
   }
 }
+
 window.signInWithGoogle = signInWithGoogle;
 
 // Handle redirect result
