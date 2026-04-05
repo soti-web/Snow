@@ -61,7 +61,7 @@ async function checkUsername() {
       status.className = 'claim-status taken';
       status.textContent = 'Error checking. Try again.';
     }
-  }, 600);
+  }, 300);
 }
 window.checkUsername = checkUsername;
 
