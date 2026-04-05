@@ -3,7 +3,8 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithRedirect,
+  getRedirectResult
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
   getFirestore, collection, query, where, getDocs
@@ -42,7 +43,6 @@ function showError(msg) {
 async function loginWithEmail() {
   const email = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
-
   if (!email || !password) { showError('Please fill in all fields.'); return; }
 
   const btn = document.querySelector('.btn-primary');
@@ -70,22 +70,23 @@ window.loginWithEmail = loginWithEmail;
 async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
   try {
-    const cred = await signInWithPopup(auth, provider);
-    const uid = cred.user.uid;
-
-    // Check if user has a portfolio
-    const q = query(collection(db, "portfolios"), where("uid", "==", uid));
-    const snap = await getDocs(q);
-
-    if (snap.empty) {
-      // New Google user — send to claim username
-      window.location.href = './claim.html';
-    } else {
-      // Existing user — send to dashboard
-      window.location.href = './dashboard.html';
-    }
+    await signInWithRedirect(auth, provider);
   } catch (err) {
     showError(err.message);
   }
 }
 window.signInWithGoogle = signInWithGoogle;
+
+// Handle redirect result
+getRedirectResult(auth).then(async (cred) => {
+  if (cred) {
+    const uid = cred.user.uid;
+    const q = query(collection(db, "portfolios"), where("uid", "==", uid));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+      window.location.href = './claim.html';
+    } else {
+      window.location.href = './dashboard.html';
+    }
+  }
+}).catch(err => console.error(err));
