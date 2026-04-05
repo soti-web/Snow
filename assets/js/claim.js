@@ -70,7 +70,9 @@ function claimUsername() {
   const val = document.getElementById('claim-input').value.trim();
   if (!val || val.length < 3) return;
   sessionStorage.setItem('claimed_username', val);
+  localStorage.setItem('claimed_username', val);
   window.location.href = './register.html';
 }
+
 window.claimUsername = claimUsername;
 
