@@ -3,7 +3,7 @@ import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10
 
 const firebaseConfig = {
   apiKey: "AIzaSyACMH3hBQqS9Jhw-d3xkLlY_RiKr0DOXsI",
-  authDomain: "soti-web.github.io",
+authDomain: "dev-muhamad.firebaseapp.com",
   projectId: "dev-muhamad",
   storageBucket: "dev-muhamad.firebasestorage.app",
   messagingSenderId: "224833840139",
