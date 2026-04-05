@@ -33,7 +33,7 @@ function toggleTheme() {
 window.toggleTheme = toggleTheme;
 
 // Get claimed username
-const username = sessionStorage.getItem('claimed_username');
+const username = sessionStorage.getItem('claimed_username') || localStorage.getItem('claimed_username');
 if (!username) window.location.href = './claim.html';
 document.getElementById('username-display').textContent = `folio.app/${username}`;
 
@@ -114,6 +114,7 @@ getRedirectResult(auth).then(async (cred) => {
     const ok = await saveUser(cred.user.uid, cred.user.email);
     if (ok) {
       sessionStorage.removeItem('claimed_username');
+      localStorage.removeItem('claimed_username');
       window.location.href = './dashboard.html';
     }
   }
