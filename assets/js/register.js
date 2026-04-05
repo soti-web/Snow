@@ -14,7 +14,8 @@ import {
 
 const firebaseConfig = {
   apiKey: "AIzaSyACMH3hBQqS9Jhw-d3xkLlY_RiKr0DOXsI",
-  authDomain: "dev-muhamad.firebaseapp.com",
+  authDomain: "soti-web.github.io",
+
   projectId: "dev-muhamad",
   storageBucket: "dev-muhamad.firebasestorage.app",
   messagingSenderId: "224833840139",
