@@ -6,64 +6,130 @@
 <title>Folio — Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/css/style.css">
-<link rel="stylesheet" href="./assets/css/auth.css">
+<link rel="stylesheet" href="./assets/css/dashboard.css">
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="builder-nav">
-  <div class="builder-nav-left">
+<nav class="dash-nav">
+  <div class="dash-nav-left">
     <div class="logo">folio.</div>
     <span class="nav-username" id="nav-username">@...</span>
   </div>
-  <div class="builder-nav-right">
-    <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙</button>
-    <button class="btn btn-ghost" onclick="viewPortfolio()">👁 View</button>
-    <button class="publish-btn" onclick="savePortfolio()">💾 Save</button>
-    <button class="btn-logout" onclick="logout()" title="Logout">↩</button>
+  <div class="dash-nav-right">
+    <button class="icon-btn-nav" onclick="toggleTheme()" id="theme-btn" title="Toggle theme">🌙</button>
+    <button class="btn btn-ghost btn-sm" onclick="viewPortfolio()">👁 View</button>
+    <button class="btn btn-primary btn-sm" onclick="savePortfolio()" id="save-btn">💾 Save</button>
+    <button class="icon-btn-nav logout-btn" onclick="logout()" title="Log out">↩</button>
   </div>
 </nav>
 
+<!-- MAIN -->
+<div class="dash-main">
 
-<!-- BODY -->
-<div class="builder-body">
+  <!-- SIDEBAR -->
+  <div class="dash-sidebar" id="dash-sidebar">
 
-  <!-- EDITOR -->
-  <div class="editor-panel" id="editor-panel">
-    <div class="editor-section">
-      <div class="editor-label">Your Info</div>
+    <!-- PROFILE HEADER -->
+    <div class="profile-header-section">
+      <div class="avatar-upload-wrap">
+        <div class="avatar-preview" id="avatar-preview">
+          <span id="avatar-emoji-display">🧑‍💻</span>
+          <img id="avatar-img" src="" alt="" style="display:none;">
+        </div>
+        <div class="avatar-actions">
+          <button class="avatar-action-btn" onclick="document.getElementById('photo-input').click()">📷 Upload photo</button>
+          <button class="avatar-action-btn" onclick="toggleEmojiPicker()">😀 Use emoji</button>
+        </div>
+        <input type="file" id="photo-input" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
+      </div>
+
+      <div class="emoji-picker-wrap" id="emoji-picker-wrap" style="display:none;">
+        <div class="emoji-grid" id="emoji-grid"></div>
+      </div>
+    </div>
+
+    <!-- BIO SECTION -->
+    <div class="dash-section">
+      <div class="dash-section-title">
+        <span>👤</span> About
+      </div>
       <div class="input-group">
-        <label>Name or Brand</label>
-        <input type="text" id="pf-name" placeholder="e.g. Hama Karwan" oninput="updatePreview()">
+        <label>Full Name</label>
+        <input type="text" id="pf-name" placeholder="e.g. Hama Karwan" oninput="markDirty()">
       </div>
       <div class="input-group">
         <label>Job Title</label>
-        <input type="text" id="pf-role" placeholder="e.g. Web Developer" oninput="updatePreview()">
+        <input type="text" id="pf-role" placeholder="e.g. Web Developer" oninput="markDirty()">
       </div>
       <div class="input-group">
-        <label>Short Bio</label>
-        <textarea id="pf-bio" placeholder="I build beautiful websites..." oninput="updatePreview()"></textarea>
+        <label>Bio</label>
+        <textarea id="pf-bio" placeholder="Tell the world about yourself..." oninput="markDirty()"></textarea>
+      </div>
+      <div class="input-group">
+        <label>Location</label>
+        <input type="text" id="pf-location" placeholder="e.g. Erbil, Iraq" oninput="markDirty()">
       </div>
     </div>
 
-    <div class="editor-section">
-      <div class="editor-label">Avatar Emoji</div>
-      <div class="emoji-grid" id="emoji-grid"></div>
+    <!-- BACKGROUND -->
+    <div class="dash-section">
+      <div class="dash-section-title"><span>🎨</span> Background</div>
+      <div class="bg-grid" id="bg-grid"></div>
     </div>
 
-    <div class="editor-section">
-      <div class="editor-label">Background Theme</div>
-      <div class="color-grid" id="color-grid"></div>
+    <!-- SKILLS -->
+    <div class="dash-section">
+      <div class="dash-section-title"><span>⚡</span> Skills</div>
+      <div class="tags-list" id="skills-list"></div>
+      <div class="tag-input-row">
+        <input type="text" id="skill-input" placeholder="Add a skill..." onkeydown="handleSkillKey(event)">
+        <button class="btn btn-ghost btn-sm" onclick="addSkill()">+ Add</button>
+      </div>
     </div>
 
-    <div class="editor-section">
-      <div class="editor-label">Your Links</div>
-      <div class="link-items" id="link-items"></div>
-      <button class="add-link-btn" onclick="addLink()">+ Add a new link</button>
+    <!-- WORK EXPERIENCE -->
+    <div class="dash-section">
+      <div class="dash-section-title"><span>💼</span> Work Experience</div>
+      <div class="work-list" id="work-list"></div>
+      <button class="add-item-btn" onclick="addWork()">+ Add experience</button>
+    </div>
+
+    <!-- SOCIAL LINKS -->
+    <div class="dash-section">
+      <div class="dash-section-title"><span>🔗</span> Links</div>
+      <div class="links-list" id="links-list"></div>
+      <button class="add-item-btn" onclick="addLink()">+ Add link</button>
+    </div>
+
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="dash-preview" id="dash-preview">
+    <div class="preview-sticky">
+      <div class="preview-label">Live Preview</div>
+      <div class="preview-browser">
+        <div class="browser-dots">
+          <div class="bd bd-r"></div>
+          <div class="bd bd-y"></div>
+          <div class="bd bd-g"></div>
+        </div>
+        <div class="browser-url" id="browser-url">folio.app/you</div>
+      </div>
+      <div class="pf-preview-card" id="pf-preview-card">
+        <!-- filled by JS -->
+      </div>
     </div>
   </div>
 
-<!-- SAVE TOAST -->
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="mobile-bottom-nav">
+  <button class="mob-nav-btn active" onclick="showMobileTab('edit')" id="mob-edit-btn">✏️ Edit</button>
+  <button class="mob-nav-btn" onclick="showMobileTab('preview')" id="mob-preview-btn">👁 Preview</button>
+</div>
+
 <div class="toast" id="toast">✓ Saved!</div>
 
 <script type="module" src="./assets/js/dashboard.js"></script>
