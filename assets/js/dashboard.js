@@ -218,18 +218,3 @@ function updatePfBg() {
 }
 window.updatePreview = updatePreview;
 
-// ===== TABS =====
-function switchTab(tab) {
-  const ep   = document.getElementById('editor-panel');
-  const pp   = document.getElementById('preview-panel');
-  const tabs = document.querySelectorAll('.tab-btn');
-  if (tab==='editor') {
-    ep.style.display=''; pp.style.display='none';
-    tabs[0].classList.add('active'); tabs[1].classList.remove('active');
-  } else {
-    pp.style.display=''; ep.style.display='none';
-    tabs[1].classList.add('active'); tabs[0].classList.remove('active');
-    updatePreview();
-  }
-}
-window.switchTab = switchTab;
