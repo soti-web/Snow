@@ -54,8 +54,7 @@ async function loginWithEmail() {
     window.location.href = './dashboard.html';
   } catch (err) {
     if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
-  showError('Wrong email or password. Try again.');
-}
+      showError('Wrong email or password. Try again.');
     } else if (err.code === 'auth/too-many-requests') {
       showError('Too many attempts. Please try again later.');
     } else {
