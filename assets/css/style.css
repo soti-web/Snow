@@ -19,6 +19,13 @@
 }
 
 
+.editor-panel {
+  width: 100%;
+  max-width: 600px;
+  border-left: none;
+}
+
+
 
 /* USERNAME INPUT AREA */
 .username-area {
@@ -329,7 +336,8 @@ footer span { color: var(--accent); }
 .publish-btn:hover { opacity:0.88; transform:translateY(-1px); }
 
 /* BUILDER BODY */
-.builder-body { display:flex; flex:1; overflow:hidden; }
+.builder-body { display:flex; flex:1; overflow:hidden; justify-content: center; }
+
 
 /* EDITOR PANEL */
 .editor-panel {
