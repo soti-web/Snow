@@ -1,21 +1,18 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getAuth,
+  signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithRedirect,
-  getRedirectResult,
-  setPersistence,
-  browserLocalPersistence
+  getRedirectResult
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
 import {
   getFirestore, collection, query, where, getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyACMH3hBQqS9Jhw-d3xkLlY_RiKr0DOXsI",
-authDomain: "dev-muhamad.firebaseapp.com",
-
+  authDomain: "dev-muhamad.firebaseapp.com",
   projectId: "dev-muhamad",
   storageBucket: "dev-muhamad.firebasestorage.app",
   messagingSenderId: "224833840139",
@@ -74,13 +71,11 @@ async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({ prompt: 'select_account' });
   try {
-    localStorage.setItem('google_pending', 'true');
     await signInWithRedirect(auth, provider);
   } catch (err) {
     showError(err.message);
   }
 }
-
 window.signInWithGoogle = signInWithGoogle;
 
 // Handle redirect result
