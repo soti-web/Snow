@@ -1,24 +1,18 @@
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getAuth,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithRedirect,
-  getRedirectResult,
-  setPersistence,
-  browserLocalPersistence
-  createUserWithEmailAndPassword
+  getRedirectResult
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
 import {
   getFirestore, doc, setDoc, getDoc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyACMH3hBQqS9Jhw-d3xkLlY_RiKr0DOXsI",
-authDomain: "dev-muhamad.firebaseapp.com",
-
+  authDomain: "dev-muhamad.firebaseapp.com",
   projectId: "dev-muhamad",
   storageBucket: "dev-muhamad.firebasestorage.app",
   messagingSenderId: "224833840139",
@@ -87,6 +81,7 @@ async function registerWithEmail() {
     const ok = await saveUser(cred.user.uid, email);
     if (ok) {
       sessionStorage.removeItem('claimed_username');
+      localStorage.removeItem('claimed_username');
       window.location.href = './dashboard.html';
     }
   } catch (err) {
@@ -99,24 +94,22 @@ async function registerWithEmail() {
     btn.disabled = false;
   }
 }
-<button class="btn btn-primary btn-full" onclick="registerWithEmail()">
-
+window.registerWithEmail = registerWithEmail;
 
 // Google register
 async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({ prompt: 'select_account' });
   try {
-    localStorage.setItem('google_pending', 'true');
+    sessionStorage.setItem('google_register', 'true');
     await signInWithRedirect(auth, provider);
   } catch (err) {
     showError(err.message);
   }
 }
-
 window.signInWithGoogle = signInWithGoogle;
 
-// Handle redirect result (after Google redirect comes back)
+// Handle redirect result
 getRedirectResult(auth).then(async (cred) => {
   if (cred && sessionStorage.getItem('google_register')) {
     sessionStorage.removeItem('google_register');
