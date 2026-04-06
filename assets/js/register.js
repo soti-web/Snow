@@ -99,7 +99,8 @@ async function registerWithEmail() {
     btn.disabled = false;
   }
 }
-window.registerWithEmail = registerWithEmail;
+<button class="btn btn-primary btn-full" onclick="registerWithEmail()">
+
 
 // Google register
 async function signInWithGoogle() {
