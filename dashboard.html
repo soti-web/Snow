@@ -48,123 +48,101 @@
       </div>
     </div>
 
-<!--
-  ═══════════════════════════════════════════════════════════════════════
-  FOLIO — TEMPLATE SELECTOR + EDIT PANEL
-  دابنێ بۆ جێی بەشی کۆنی templates grid و edit form لە dashboard.html
-  ═══════════════════════════════════════════════════════════════════════
--->
+    <!-- TEMPLATES -->
+    <div class="templates-section">
+      <div class="dash-section-title">Templates</div>
+      <div class="templates-grid" id="templates-grid"></div>
+    </div>
 
-<!-- ── TEMPLATES SECTION ── -->
-
-<div class="sidebar-section">
-  <div class="section-label">Templates</div>
-
-  <!-- GRID -->
-
-  <div class="tmpl-grid" id="templates-grid">
-    <!-- Rendered by renderTemplatesGrid() in dashboard.js -->
-  </div>
-
-  <!-- ══ EDIT PANEL — slides open after template pick ══ -->
-
-  <div class="edit-panel-wrap" id="edit-panel-wrap">
-    <div class="edit-panel">
-
-```
-  <!-- Panel Header -->
-  <div class="panel-header">
-    <div class="panel-header-dot"></div>
-    <div class="panel-header-title">Editing</div>
-    <div class="panel-header-tmpl" id="edit-panel-tmpl-name">—</div>
-  </div>
-
-  <!-- ─ AVATAR ─ -->
-  <div class="edit-section">
-    <div class="edit-section-label">Avatar</div>
-    <div class="avatar-edit-area">
-      <div class="avatar-circle">
-        <img id="avatar-img" style="display:none;">
-        <span id="avatar-emoji-display">🧑‍💻</span>
+    <!-- ABOUT -->
+    <div class="dash-section">
+      <div class="dash-section-title">About</div>
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="pf-name" placeholder="e.g. Hama Karwan" oninput="markDirty()">
       </div>
-      <div class="avatar-actions">
-        <label class="avatar-btn accent" style="cursor:pointer;">
-          Upload photo
-          <input type="file" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
-        </label>
-        <button class="avatar-btn" onclick="toggleEmojiPicker()">Pick emoji</button>
+      <div class="input-group">
+        <label>Job Title</label>
+        <input type="text" id="pf-role" placeholder="e.g. Web Developer" oninput="markDirty()">
+      </div>
+      <div class="input-group">
+        <label>Bio</label>
+        <textarea id="pf-bio" placeholder="Tell the world about yourself..." oninput="markDirty()"></textarea>
+      </div>
+      <div class="input-group">
+        <label>Location</label>
+        <input type="text" id="pf-location" placeholder="e.g. Erbil, Iraq" oninput="markDirty()">
       </div>
     </div>
-    <!-- Emoji picker -->
-    <div class="emoji-picker-panel" id="emoji-picker-wrap">
-      <div class="emoji-grid" id="emoji-grid"></div>
+
+    <!-- BACKGROUND -->
+    <div class="dash-section">
+      <div class="dash-section-title">Background</div>
+      <div class="bg-grid" id="bg-grid"></div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="dash-section">
+      <div class="dash-section-title">Skills</div>
+      <div class="tags-list" id="skills-list"></div>
+      <div class="tag-input-row">
+        <input type="text" id="skill-input" placeholder="Add a skill..." onkeydown="handleSkillKey(event)">
+        <button class="btn btn-ghost" style="font-size:0.78rem;padding:0.4rem 0.75rem;" onclick="addSkill()">Add</button>
+      </div>
+    </div>
+
+    <!-- WORK -->
+    <div class="dash-section">
+      <div class="dash-section-title">Work Experience</div>
+      <div class="work-list" id="work-list"></div>
+      <button class="add-item-btn" onclick="addWork()">+ Add experience</button>
+    </div>
+
+    <!-- LINKS -->
+    <div class="dash-section">
+      <div class="dash-section-title">Links</div>
+      <div class="links-list" id="links-list"></div>
+      <button class="add-item-btn" onclick="addLink()">+ Add link</button>
+    </div>
+
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="dash-preview" id="dash-preview">
+    <div class="preview-sticky">
+      <div class="preview-label">Live Preview</div>
+      <div class="preview-browser">
+        <div class="browser-dots">
+          <div class="bd bd-r"></div>
+          <div class="bd bd-y"></div>
+          <div class="bd bd-g"></div>
+        </div>
+        <div class="browser-url" id="browser-url">folio.app/you</div>
+      </div>
+      <div class="pf-preview-card" id="pf-preview-card"></div>
     </div>
   </div>
 
-  <!-- ─ PROFILE INFO ─ -->
-  <div class="edit-section">
-    <div class="edit-section-label">Profile</div>
-    <input id="pf-name"     class="glass-input" type="text" placeholder="Your name"      oninput="markDirty()">
-    <input id="pf-role"     class="glass-input" type="text" placeholder="Your role / title" oninput="markDirty()">
-    <input id="pf-location" class="glass-input" type="text" placeholder="📍 Location"    oninput="markDirty()">
-    <textarea id="pf-bio"   class="glass-input" rows="3"    placeholder="Short bio…"      oninput="markDirty()"
-      style="resize:vertical;margin-top:7px;line-height:1.55;"></textarea>
-  </div>
+</div>
 
-  <!-- ─ SKILLS ─ -->
-  <div class="edit-section">
-    <div class="edit-section-label">Skills</div>
-    <div class="skill-tags-wrap" id="skills-list"></div>
-    <div class="skill-add-row">
-      <input id="skill-input" class="glass-input" type="text"
-        placeholder="e.g. React, Figma…" onkeydown="handleSkillKey(event)"
-        style="flex:1;">
-      <button class="skill-add-btn" onclick="addSkill()">+ Add</button>
-    </div>
-  </div>
+<!-- MOBILE BOTTOM NAV -->
+<div class="mobile-bottom-nav">
+  <button class="mob-nav-btn active" onclick="showMobileTab('edit')" id="mob-edit-btn">Edit</button>
+  <button class="mob-nav-btn" onclick="showMobileTab('preview')" id="mob-preview-btn">Preview</button>
+</div>
 
-  <!-- ─ EXPERIENCE ─ -->
-  <div class="edit-section">
-    <div class="edit-section-label">Experience</div>
-    <div id="work-list"></div>
-    <button class="add-item-btn" onclick="addWork()">+ Add experience</button>
-  </div>
-
-  <!-- ─ LINKS ─ -->
-  <div class="edit-section">
-    <div class="edit-section-label">Links</div>
-    <div id="links-list"></div>
-    <button class="add-item-btn" onclick="addLink()">+ Add link</button>
-  </div>
-
-  <!-- ─ BACKGROUND ─ -->
-  <div class="edit-section">
-    <div class="edit-section-label">Background</div>
-    <div class="bg-swatches" id="bg-grid"></div>
-  </div>
-
-</div><!-- /edit-panel -->
-```
-
-  </div><!-- /edit-panel-wrap -->
-</div><!-- /sidebar-section -->
-
-<!-- ══ UPGRADE MODAL ══ -->
-
-<div class="upgrade-overlay" id="upgrade-modal" onclick="handleModalClick(event)">
-  <div class="upgrade-sheet">
-    <div class="upgrade-handle"></div>
-    <div style="font-size:2rem;text-align:center;margin-bottom:10px;">✨</div>
-    <div class="upgrade-title">Unlock Pro Templates</div>
-    <div class="upgrade-sub">Get Gold, Fire, Motion, Neon, Glass and more with a Pro plan.</div>
-    <button class="upgrade-pro-btn">Upgrade to Pro →</button>
-    <button class="upgrade-cancel-btn" onclick="closeUpgradeModal()">Maybe later</button>
+<!-- UPGRADE MODAL -->
+<div class="modal-overlay" id="upgrade-modal" onclick="handleModalClick(event)">
+  <div class="modal-box">
+    <div class="modal-icon">⭐</div>
+    <h2>Premium Template</h2>
+    <p>This template is available for Pro users. Upgrade to unlock all premium templates and features.</p>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeUpgradeModal()">Maybe later</button>
+    <button class="modal-close" onclick="closeUpgradeModal()">Close</button>
   </div>
 </div>
 
-<!-- ══ TOAST ══ -->
-
-<div id="toast" class="dash-toast"></div>
+<div class="toast" id="toast"></div>
 
 <script type="module" src="./assets/js/dashboard.js"></script>
 </body>
